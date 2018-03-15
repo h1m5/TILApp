@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "Auth",
+        "repositoryURL": "https://github.com/vapor/auth.git",
+        "state": {
+          "branch": null,
+          "revision": "0159803fc2cf2e38aeeb3ba4ba42358886923b1b",
+          "version": "2.0.0-rc.2"
+        }
+      },
+      {
         "package": "Console",
         "repositoryURL": "https://github.com/vapor/console.git",
         "state": {
@@ -65,12 +74,30 @@
         }
       },
       {
-        "package": "FluentSQLite",
-        "repositoryURL": "https://github.com/vapor/fluent-sqlite.git",
+        "package": "FluentMySQL",
+        "repositoryURL": "https://github.com/vapor/fluent-mysql.git",
         "state": {
           "branch": null,
-          "revision": "a2d70d95b660631d591a7aa1ed1a65c91f67acf3",
+          "revision": "25d442980a32bbc58ae00702c3af01fdaac403a3",
+          "version": "3.0.0-rc.1.1"
+        }
+      },
+      {
+        "package": "Leaf",
+        "repositoryURL": "https://github.com/vapor/leaf.git",
+        "state": {
+          "branch": null,
+          "revision": "25583fb3e3e40bf38ef7f762a05690f07d604060",
           "version": "3.0.0-rc.1"
+        }
+      },
+      {
+        "package": "MySQL",
+        "repositoryURL": "https://github.com/vapor/mysql.git",
+        "state": {
+          "branch": null,
+          "revision": "ec23247869c0805506982aaa740e362286986b40",
+          "version": "3.0.0-rc.1.1"
         }
       },
       {
@@ -101,11 +128,11 @@
         }
       },
       {
-        "package": "SQLite",
-        "repositoryURL": "https://github.com/vapor/sqlite.git",
+        "package": "TLS",
+        "repositoryURL": "https://github.com/vapor/tls.git",
         "state": {
           "branch": null,
-          "revision": "951e4f128d15a8a49e009fcf7a49f8e66e189eb7",
+          "revision": "648e653758ad29f7087c95a91bc0d183712b94ab",
           "version": "3.0.0-rc.1"
         }
       },
@@ -116,15 +143,6 @@
           "branch": null,
           "revision": "cda3174c5e029526a5b11b19fcfd83bd65b6876a",
           "version": "1.0.0-rc.1.1"
-        }
-      },
-      {
-        "package": "TLS",
-        "repositoryURL": "https://github.com/vapor/tls.git",
-        "state": {
-          "branch": null,
-          "revision": "648e653758ad29f7087c95a91bc0d183712b94ab",
-          "version": "3.0.0-rc.1"
         }
       },
       {
