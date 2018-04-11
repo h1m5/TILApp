@@ -14,6 +14,8 @@ struct WebsiteController: RouteCollection {
         authSessionRoutes.get("category", Category.parameter, use: categoryHandler)
         authSessionRoutes.get("login", use: loginHandler)
         authSessionRoutes.post("login", use: loginPostHandler)
+        authSessionRoutes.get("signup", use: signupHandler)
+        authSessionRoutes.post("signup", use: signupPostHandler)
         
         let protectedRoutes = authSessionRoutes.grouped(RedirectMiddleware<User>(path: "/login"))
         protectedRoutes.get("create-acronym", use: createAcronymHandler)
@@ -121,7 +123,7 @@ struct WebsiteController: RouteCollection {
     }
     
     func loginHandler(_ req: Request) throws -> Future<View> {
-        let context = LoginContext(title: "Log In")
+        let context = LoginContext(title: "Log Innn")
         return try req.leaf().render("login", context)
     }
     
@@ -137,12 +139,43 @@ struct WebsiteController: RouteCollection {
             }
         }
     }
+    
+    func signupHandler(_ req: Request) throws -> Future<View> {
+        let context = SignupContext(title: "Sign Up")
+        return try req.leaf().render("signup", context)
+    }
+    
+    func signupPostHandler(_ req: Request) throws -> Future<Response> {
+        return try req.content.decode(SignupPostData.self).flatMap(to: Response.self) { data in
+            guard data.password != "", data.password == data.password2 else {
+                return Future<Response>.init(req.redirect(to: "/signup"))
+            }
+            let hasher = try req.make(BCryptHasher.self)
+            let hashedPassword = try hasher.make(data.password)
+            let user = User(name: data.name, username: data.username, password: hashedPassword)
+            return user.save(on: req).map(to: Response.self, { user in
+                try req.authenticateSession(user)
+                return req.redirect(to: "/")
+            })
+        }
+    }
 }
 
 extension Request {
     func leaf() throws -> LeafRenderer {
         return try self.make(LeafRenderer.self)
     }
+}
+
+struct SignupPostData: Content {
+    let name: String
+    let username: String
+    let password: String
+    let password2: String
+}
+
+struct SignupContext: Encodable {
+    let title: String
 }
 
 struct LoginContext: Encodable {
