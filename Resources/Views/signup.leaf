@@ -19,7 +19,7 @@
 
         <div class="form-group">
             <label for="password2">Repeat Password</label>
-            <input type="password2" name="password2" class="form-control" id="password">
+            <input type="password" name="password2" class="form-control" id="password">
         </div>
 
         <button type="submit" class="btn btn-primary">Sign up</button>
