@@ -5,6 +5,7 @@ import Foundation
 import HTTP
 
 // The contents of main are wrapped in a do/catch block because any errors that get raised to the top level will crash Xcode
+//var app = try Application.init()
 do {
     var config = Config.default()
     var env = try Environment.detect()
@@ -19,6 +20,8 @@ do {
     )
     
     try App.boot(app)
+    
+    NewsAPI.shared.start(app)
     
     try app.run()
 } catch {

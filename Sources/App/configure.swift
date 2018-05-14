@@ -40,8 +40,8 @@ public func configure(
     migrations.add(model: Category.self, database: .mysql)
     migrations.add(model: AcronymCategoryPivot.self, database: .mysql)
     migrations.add(model: Token.self, database: .mysql)
-//    migrations.add(model: UUser.self, database: .mysql)
-    migrations.add(migration: UUser.self, database: .mysql)
+    migrations.add(model: UUser.self, database: .mysql)
+    migrations.add(model: NewsArticle.self, database: .mysql)
     services.register(migrations)
     
     User.Public.defaultDatabase = .mysql
@@ -54,6 +54,28 @@ public func configure(
     services.register(router, as: Router.self)
     
     // Configure the rest of your application here
-    let s = try EngineServerConfig.detect(hostname: "192.168.0.100", port: 8080, backlog: 2, workerCount: 2, maxConnectionsPerIP: 2)
-    services.register(s)
+//    let s = try EngineServerConfig.detect(hostname: "192.168.0.100", port: 8080, backlog: 2, workerCount: 2, maxConnectionsPerIP: 2)
+//    services.register(s)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
