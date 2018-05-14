@@ -2,7 +2,6 @@ import FluentMySQL
 import Vapor
 import Leaf
 import Authentication
-
 /// Called before your application initializes.
 ///
 /// [Learn More →](https://docs.vapor.codes/3.0/getting-started/structure/#configureswift)
@@ -14,7 +13,6 @@ public func configure(
     // Register providers first
     try services.register(FluentMySQLProvider())
     try services.register(LeafProvider())
-    
     // Register middleware
     var middlewares = MiddlewareConfig() // Create _empty_ middleware config
     middlewares.use(FileMiddleware.self) // Serves files from `Public/` directory
@@ -30,8 +28,8 @@ public func configure(
     
     // Configure a SQLite database
     var databases = DatabaseConfig()
-//    let database = MySQLDatabase(hostname: "localhost", user: "h1m5", password: "password", database: "vapor")
-    let database = MySQLDatabase(hostname: "sql7.freemysqlhosting.net", port: 3306, user: "sql7237548", password: "GJxP6bTrQW", database: "sql7237548")
+    let database = MySQLDatabase(hostname: "localhost", user: "h1m5", password: "password", database: "vapor")
+    //    let database = MySQLDatabase(hostname: "sql7.freemysqlhosting.net", port: 3306, user: "sql7237548", password: "GJxP6bTrQW", database: "sql7237548")
     databases.add(database: database, as: .mysql)
     services.register(databases)
     
@@ -42,9 +40,13 @@ public func configure(
     migrations.add(model: Category.self, database: .mysql)
     migrations.add(model: AcronymCategoryPivot.self, database: .mysql)
     migrations.add(model: Token.self, database: .mysql)
+//    migrations.add(model: UUser.self, database: .mysql)
+    migrations.add(migration: UUser.self, database: .mysql)
     services.register(migrations)
     
     User.Public.defaultDatabase = .mysql
+    UUser.defaultDatabase = .mysql
+    
     
     // Register routes to the router
     let router = EngineRouter.default()
@@ -52,4 +54,6 @@ public func configure(
     services.register(router, as: Router.self)
     
     // Configure the rest of your application here
+    let s = try EngineServerConfig.detect(hostname: "192.168.0.100", port: 8080, backlog: 2, workerCount: 2, maxConnectionsPerIP: 2)
+    services.register(s)
 }

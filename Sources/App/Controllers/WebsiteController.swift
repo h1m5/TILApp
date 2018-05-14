@@ -27,6 +27,7 @@ struct WebsiteController: RouteCollection {
     }
     
     func indexHandler(_ req: Request) throws -> Future<View> {
+//        PushManager.shared.push(to: ["080524a21873cc2f253ddec63e79ffeaca937f2e5b4614cf7acc2f5d27c2eff1"], title: "Hello", body: "From server")
         return Acronym.query(on: req).all().flatMap(to: View.self) { acronyms in
             let context = IndexContent(title: "Homepage", acronyms: acronyms.isEmpty ? nil : acronyms)
             return try req.leaf().render("index", context)
